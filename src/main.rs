@@ -1,4 +1,8 @@
+mod eth;
+
 use clap::{Parser, Subcommand};
+use eth::calc_selector;
+
 
 #[derive(Parser, Debug)]
 #[clap(author, version, about, long_about = None)]
@@ -49,7 +53,8 @@ fn main() {
         Commands::Eth { subcommand} => {
             match subcommand {
                 EthSubcommands::Selector { function_signature } => {
-                    println!("fn: {}", function_signature);
+                    let selector = calc_selector(function_signature);
+                    println!("Selector: {}", selector);
                 }
 
                 EthSubcommands::Address { private_key } => {
