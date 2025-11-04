@@ -378,6 +378,7 @@ dependencies = [
  "clap",
  "hex",
  "predicates",
+ "regex",
  "tiny-keccak",
 ]
 

@@ -9,3 +9,4 @@ tiny-keccak = { version = "2.0.0", features = ["keccak"] }
 hex = "0.4"
 assert_cmd = "2"
 predicates = "3"
+regex = "1"
