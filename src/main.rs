@@ -55,7 +55,7 @@ fn main() {
                 }
 
                 EthSubcommands::Address { private_key } => {
-                    println!("private_key: {}", private_key);
+                    eth::address::handle_address(private_key);
                 }
 
             }
