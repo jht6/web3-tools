@@ -3726,6 +3726,8 @@ name = "web3-tools"
 version = "0.1.0"
 dependencies = [
  "assert_cmd",
+ "base64 0.21.7",
+ "bs58",
  "clap",
  "ethers",
  "hex",

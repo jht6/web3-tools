@@ -1,4 +1,5 @@
 mod eth;
+mod common;
 
 use clap::{Parser, Subcommand};
 
@@ -20,7 +21,12 @@ enum Commands {
     Solana {
         #[clap(subcommand)]
         subcommand: SolanaSubcommands,
-    }
+    },
+
+    Common {
+        #[clap(subcommand)]
+        subcommand: CommonSubcommands,
+    },
 }
 
 #[derive(Subcommand, Debug, Clone)]
@@ -42,6 +48,40 @@ enum SolanaSubcommands {
         #[clap(value_name = "PRIVATE_KEY")]
         private_key: String,
     }
+}
+
+#[derive(Subcommand, Debug, Clone)]
+enum CommonSubcommands {
+    HexToBs64 {
+        #[clap(value_name = "HEX_STRING")]
+        hex_str: String,
+    },
+
+    HexToBs58 {
+        #[clap(value_name = "HEX_STRING")]
+        hex_str: String,
+    },
+
+    Bs64ToHex {
+        #[clap(value_name = "BASE64_STRING")]
+        bs64_str: String,
+    },
+
+    Bs64ToBs58 {
+        #[clap(value_name = "BASE64_STRING")]
+        bs64_str: String,
+    },
+
+    Bs58ToHex {
+        #[clap(value_name = "BASE58_STRING")]
+        bs58_str: String,
+    },
+
+    Bs58ToBs64 {
+        #[clap(value_name = "BASE58_STRING")]
+        bs58_str: String,
+    },
+    
 }
 
 fn main() {
@@ -66,6 +106,34 @@ fn main() {
             match subcommand {
                 SolanaSubcommands::Address { private_key } => {
                     println!("private_key: {}", private_key);
+                }
+            }
+        }
+
+        Commands::Common { subcommand } => {
+            match subcommand {
+                CommonSubcommands::HexToBs64 { hex_str } => {
+                    common::encode::handle_hex_to_bs64(hex_str);
+                }
+
+                CommonSubcommands::HexToBs58 { hex_str } => {
+                    common::encode::handle_hex_to_bs58(hex_str);
+                }
+
+                CommonSubcommands::Bs64ToHex { bs64_str } => {
+                    common::encode::handle_bs64_to_hex(bs64_str);
+                }
+
+                CommonSubcommands::Bs64ToBs58 { bs64_str } => {
+                    common::encode::handle_bs64_to_bs58(bs64_str);
+                }
+
+                CommonSubcommands::Bs58ToHex { bs58_str } => {
+                    common::encode::handle_bs58_to_hex(bs58_str);
+                }
+
+                CommonSubcommands::Bs58ToBs64 { bs58_str } => {
+                    common::encode::handle_bs58_to_bs64(bs58_str);
                 }
             }
         }
