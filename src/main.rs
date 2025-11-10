@@ -81,6 +81,11 @@ enum CommonSubcommands {
         #[clap(value_name = "BASE58_STRING")]
         bs58_str: String,
     },
+
+    BytesToHex {
+        #[clap(value_name = "BYTES")]
+        bytes: String,
+    },
     
 }
 
@@ -134,6 +139,10 @@ fn main() {
 
                 CommonSubcommands::Bs58ToBs64 { bs58_str } => {
                     common::encode::handle_bs58_to_bs64(bs58_str);
+                }
+
+                CommonSubcommands::BytesToHex { bytes } => {
+                    common::encode::handle_bytes_to_hex(bytes);
                 }
             }
         }
