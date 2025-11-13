@@ -39,7 +39,13 @@ enum EthSubcommands {
     Address {
         #[clap(value_name = "ADDRESS")]
         private_key: String,
-    }
+    },
+
+    SigToRSV {
+        #[clap(value_name = "SIGNATURE_HEX")]
+        signature: String,
+    },
+
 }
 
 #[derive(Subcommand, Debug, Clone)]
@@ -101,6 +107,10 @@ fn main() {
 
                 EthSubcommands::Address { private_key } => {
                     eth::address::handle_address(private_key);
+                }
+
+                EthSubcommands::SigToRSV { signature } => {
+                    eth::signature::handle_sig_to_rsv(signature);
                 }
 
             }
